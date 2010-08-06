@@ -16,13 +16,13 @@ class UNL_Geography_SpatialData_Campus
     
     static private $db;
     
-	public $bldgs;
-	
-	function __construct()
-	{
-		$this->bldgs = new UNL_Common_Building();
-	}
-	
+    public $bldgs;
+    
+    function __construct()
+    {
+        $this->bldgs = new UNL_Common_Building();
+    }
+    
     static function getDB()
     {
         if (!isset(self::$db)) {
@@ -30,7 +30,7 @@ class UNL_Geography_SpatialData_Campus
         }
         return self::$db;
     }
-	
+    
     static function tableExists($table)
     {
         $db = self::getDB();
@@ -61,27 +61,27 @@ class UNL_Geography_SpatialData_Campus
             }
         }
     }
-	
-	/**
-	 * Returns the geographical coordinates for a building.
-	 * 
-	 * @param string $code Building Code for the building you want coordinates of.
-	 * @return Associative array of coordinates lat and lon. false on error. 
-	 */
-	function getGeoCoordinates($code)
-	{
-		if ($this->buildingExists($code)) {
-    		// Code is valid, find the geo coordinates.
-		    $this->_checkDB();
+    
+    /**
+     * Returns the geographical coordinates for a building.
+     * 
+     * @param string $code Building Code for the building you want coordinates of.
+     * @return Associative array of coordinates lat and lon. false on error. 
+     */
+    function getGeoCoordinates($code)
+    {
+        if ($this->buildingExists($code)) {
+            // Code is valid, find the geo coordinates.
+            $this->_checkDB();
             if ($result = self::getDB()->query('SELECT lat,lon FROM campus_spatialdata WHERE code = \''.$code.'\';')) {
                 while ($coords = $result->fetch()) {
                     return array('lat'=>$coords['lat'],
                                  'lon'=>$coords['lon']);
                 }
             }
-		}
-		return false;
-	}
+        }
+        return false;
+    }
     
     protected function _checkDB()
     {
@@ -90,44 +90,44 @@ class UNL_Geography_SpatialData_Campus
             self::importCSV('campus_spatialdata', self::getDataDir().'campus_spatialdata.csv');
         }
     }
-	
-	/**
-	 * Checks if a building with the given code exists.
-	 * @param string Building code.
-	 * @return bool true|false
-	 */
-	function buildingExists($code)
-	{
-	    if (isset($this->bldgs->codes[$code])) {
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
-	
-	/**
-	 * returns the map url for a given building.
-	 * 
-	 * @param string $code Building code.
-	 * @return string URL to the map.
-	 */
-	function getMapURL($code)
-	{
-	    $mapurl = 'http://www1.unl.edu/tour/';
-	    return $mapurl.$code;
-	}
-	
+    
+    /**
+     * Checks if a building with the given code exists.
+     * @param string Building code.
+     * @return bool true|false
+     */
+    function buildingExists($code)
+    {
+        if (isset($this->bldgs->codes[$code])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * returns the map url for a given building.
+     * 
+     * @param string $code Building code.
+     * @return string URL to the map.
+     */
+    function getMapURL($code)
+    {
+        $mapurl = 'http://www1.unl.edu/tour/';
+        return $mapurl.$code;
+    }
+    
     static public function getDataDir()
     {
         if ('@@DATA_DIR@@' == '@@DATA'.'_DIR@@') {
-            return dirname(__FILE__) . '/data/';
+            return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/';
         }
         return '@@DATA_DIR@@/UNL_Geography_SpatialData_Campus/data/';
     }
-	
-	static public function getTableDefinition()
-	{
-	    return "CREATE TABLE campus_spatialdata (
+    
+    static public function getTableDefinition()
+    {
+        return "CREATE TABLE campus_spatialdata (
                   id int(11) NOT NULL,
                   code varchar(10) NOT NULL default '',
                   lat float(16,14) NOT NULL default '0.00000000000000',
@@ -135,7 +135,7 @@ class UNL_Geography_SpatialData_Campus
                   PRIMARY KEY  (id),
                   UNIQUE (code)
                 ) ; ";
-	}
+    }
 }
 
 ?>
