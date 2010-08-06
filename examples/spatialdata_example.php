@@ -9,8 +9,9 @@
 <p>This file demonstrates the usage of the UNL_Geography_SpatialData_Campus package.</p>
 <?php
 
-require_once dirname(__FILE__).'/../Campus.php';
-//require_once 'UNL/Geography/SpatialData/Campus.php';
+set_include_path(dirname(dirname(__FILE__)).'/src'.PATH_SEPARATOR.'/Users/bbieber/workspace/UNL_Common/src');
+
+require_once 'UNL/Geography/SpatialData/Campus.php';
 require_once 'UNL/Common/Building.php';
 
 $bldgs = new UNL_Common_Building();
@@ -25,6 +26,8 @@ foreach (array('NH','501') as $bldg_code) {
 	echo '</ul>';
 	echo '<a href="#" onclick="document.getElementById(\'source\').style.display=\'block\'; return false;">View Source+</a><div id="source" style="display:none;">'.highlight_file($_SERVER['SCRIPT_FILENAME'],true).'</div>';
 }
+
+var_dump($campus->getGeoCoordinates('JH'));
 
 ?>
 </body>
