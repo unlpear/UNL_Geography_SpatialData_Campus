@@ -5,9 +5,11 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     static public $db_file = 'spatialdata.sqlite';
 
-    static private $db;
+    static protected $db;
     
     public $bldgs;
+
+    static protected $db_class = 'SQLiteDatabase';
 
     function __construct()
     {
@@ -25,7 +27,7 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
         if ($this->buildingExists($code)) {
             // Code is valid, find the geo coordinates.
             $this->_checkDB();
-            if ($result = self::getDB()->query('SELECT lat,lon FROM campus_spatialdata WHERE code = \''.$code.'\';')) {
+            if ($result = $this->getDB()->query('SELECT lat,lon FROM campus_spatialdata WHERE code = \''.$code.'\';')) {
                 while ($coords = $result->fetch()) {
                     return array('lat'=>$coords['lat'],
                                  'lon'=>$coords['lon']);
@@ -51,9 +53,9 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     protected function _checkDB()
     {
-       if (!self::tableExists('campus_spatialdata')) {
-            self::getDB()->queryExec(self::getTableDefinition());
-            self::importCSV('campus_spatialdata', self::getDataDir().'campus_spatialdata.csv');
+       if (!$this->tableExists('campus_spatialdata')) {
+            $this->getDB()->query(self::getTableDefinition());
+            $this->importCSV('campus_spatialdata', self::getDataDir().'campus_spatialdata.csv');
         }
     }
 
@@ -69,32 +71,37 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
                 ) ; ";
     }
 
-    static function getDB()
+    function getDB()
     {
         if (!isset(self::$db)) {
-            return self::__connect();
+            return $this->__connect();
         }
         return self::$db;
     }
 
-    static function tableExists($table)
+    function tableExists($table)
     {
-        $db = self::getDB();
+        $db = $this->getDB();
         $result = $db->query("SELECT name FROM sqlite_master WHERE type='table' AND name='$table'");
-        return $result->numRows() > 0;
+        return $this->_getResultRowCount($result) > 0;
     }
 
-    static protected function __connect()
+    protected function _getResultRowCount($result)
     {
-        if (self::$db = new SQLiteDatabase(self::getDataDir().self::$db_file)) {
+        return $result->numRows();
+    }
+
+    protected function __connect()
+    {
+        if (self::$db = new self::$db_class(self::getDataDir().self::$db_file)) {
             return self::$db;
         }
         throw new Exception('Cannot connect to database!');
     }
 
-    static function importCSV($table, $filename)
+    public function importCSV($table, $filename)
     {
-        $db = self::getDB();
+        $db = $this->getDB();
         if ($h = fopen($filename,'r')) {
             while ($line = fgets($h)) {
                 $data = array();
@@ -103,7 +110,7 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
                     $data[] = "'".sqlite_escape_string(stripslashes(trim($field, "\"\n")))."'";
                 }
                 $data = implode(',',$data);
-                $db->queryExec("INSERT INTO ".$table." VALUES ($data);");
+                $db->query("INSERT INTO ".$table." VALUES ($data);");
             }
         }
     }
