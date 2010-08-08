@@ -8,8 +8,8 @@
 <body>
 <p>This file demonstrates the usage of the UNL_Geography_SpatialData_Campus package.</p>
 <?php
-
-set_include_path(dirname(dirname(__FILE__)).'/src'.PATH_SEPARATOR.'/Users/bbieber/workspace/UNL_Common/src');
+ini_set('display_errors', true);
+set_include_path(dirname(dirname(__FILE__)).'/src'.PATH_SEPARATOR.dirname(dirname(__FILE__)).'/lib/php');
 
 require_once 'UNL/Geography/SpatialData/Campus.php';
 require_once 'UNL/Common/Building.php';
