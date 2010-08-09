@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+ <name>UNL_Geography_SpatialData_Campus</name>
+ <channel>pear.unl.edu</channel>
+ <summary>Spatial Data for buildings on the UNL Campus
+</summary>
+ <description>
+This package contains spatial data, latitude and longitude for buildings on the UNL Campus.</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>saltybeagle@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-08-08</date>
+ <time>19:03:56</time>
+ <version>
+  <release>0.4.0</release>
+  <api>0.4.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>Major refactoring:
+
+* Rearrange source for running out of svn checkout
+* Add driver based interface
+
+
+Add data driver interfaces</notes>
+ <contents>
+  <dir name="/">
+   <file role="php" name="php/UNL/Geography/SpatialData/SQLiteDriver.php"/>
+   <file role="php" name="php/UNL/Geography/SpatialData/PDOSQLiteDriver.php"/>
+   <file role="php" name="php/UNL/Geography/SpatialData/DriverInterface.php"/>
+   <file role="php" name="php/UNL/Geography/SpatialData/Campus.php"/>
+   <file role="doc" name="doc/UNL_Geography_SpatialData_Campus/pear.unl.edu/examples/examples/spatialdata_example.php"/>
+   <file role="doc" name="doc/UNL_Geography_SpatialData_Campus/pear.unl.edu/examples/examples/pdosqlite_example.php"/>
+   <file role="data" name="data/UNL_Geography_SpatialData_Campus/pear.unl.edu/spatialdata.sqlite"/>
+   <file role="data" name="data/UNL_Geography_SpatialData_Campus/pear.unl.edu/spatialdata.pdo.sqlite"/>
+   <file role="data" name="data/UNL_Geography_SpatialData_Campus/pear.unl.edu/campus_spatialdata.csv"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.8</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease>
+  <filelist>
+   <install name="data/UNL_Geography_SpatialData_Campus/pear.unl.edu/campus_spatialdata.csv" as="pear.unl.edu/campus_spatialdata.csv"/>
+   <install name="data/UNL_Geography_SpatialData_Campus/pear.unl.edu/spatialdata.pdo.sqlite" as="pear.unl.edu/spatialdata.pdo.sqlite"/>
+   <install name="data/UNL_Geography_SpatialData_Campus/pear.unl.edu/spatialdata.sqlite" as="pear.unl.edu/spatialdata.sqlite"/>
+   <install name="doc/UNL_Geography_SpatialData_Campus/pear.unl.edu/examples/examples/pdosqlite_example.php" as="pear.unl.edu/examples/examples/pdosqlite_example.php"/>
+   <install name="doc/UNL_Geography_SpatialData_Campus/pear.unl.edu/examples/examples/spatialdata_example.php" as="pear.unl.edu/examples/examples/spatialdata_example.php"/>
+   <install name="php/UNL/Geography/SpatialData/Campus.php" as="UNL/Geography/SpatialData/Campus.php"/>
+   <install name="php/UNL/Geography/SpatialData/DriverInterface.php" as="UNL/Geography/SpatialData/DriverInterface.php"/>
+   <install name="php/UNL/Geography/SpatialData/PDOSQLiteDriver.php" as="UNL/Geography/SpatialData/PDOSQLiteDriver.php"/>
+   <install name="php/UNL/Geography/SpatialData/SQLiteDriver.php" as="UNL/Geography/SpatialData/SQLiteDriver.php"/>
+  </filelist>
+ </phprelease>
+</package>

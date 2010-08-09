@@ -1,1 +1,4 @@
-Rearrange source.
+Major refactoring:
+
+* Rearrange source for running out of svn checkout
+* Add driver based interface

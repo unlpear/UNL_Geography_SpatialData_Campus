@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.8.0alpha1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
  <name>UNL_Geography_SpatialData_Campus</name>
  <channel>pear.unl.edu</channel>
- <summary>This package contains spatial data, latitude and longitude for buildings on the UNL Campus.</summary>
- <description>Spatial Data for buildings on the UNL Campus</description>
+ <summary>Spatial Data for buildings on the UNL Campus
+</summary>
+ <description>
+This package contains spatial data, latitude and longitude for buildings on the UNL Campus.</description>
  <lead>
   <name>Brett Bieber</name>
   <user>saltybeagle</user>
-  <email>brett.bieber@gmail.com</email>
+  <email>saltybeagle@php.net</email>
   <active>yes</active>
  </lead>
- <date>2009-02-12</date>
- <time>08:11:56</time>
+ <date>2010-08-08</date>
+ <time>19:03:56</time>
  <version>
-  <release>0.3.7</release>
-  <api>0.3.0</api>
+  <release>0.4.0</release>
+  <api>0.4.0</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>alpha</release>
+  <api>alpha</api>
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
- <notes>
-Add SDPG
- </notes>
+ <notes>Major refactoring:
+
+* Rearrange source for running out of svn checkout
+* Add driver based interface
+
+
+Add data driver interfaces</notes>
  <contents>
-  <dir baseinstalldir="UNL/Geography/SpatialData" name="/">
-   <dir name="data">
-    <file name="campus_spatialdata.csv" role="data" />
-    <file name="spatialdata.sqlite" role="data" />
-   </dir> <!-- /data -->
+  <dir name="/">
+   <dir name="data" baseinstalldir="/">
+    <file role="data" name="campus_spatialdata.csv"/>
+    <file role="data" name="spatialdata.pdo.sqlite"/>
+    <file role="data" name="spatialdata.sqlite"/>
+   </dir>
    <dir name="examples">
-    <file name="spatialdata_example.php" role="doc" />
-   </dir> <!-- /examples -->
-   <file name="Campus.php" role="php">
-    <tasks:replace from="@@DATA_DIR@@" to="data_dir" type="pear-config" />
-   </file>
-  </dir> <!-- / -->
+    <file role="doc" name="pdosqlite_example.php"/>
+    <file role="doc" name="spatialdata_example.php"/>
+   </dir>
+   <dir name="src" baseinstalldir="/">
+    <dir name="UNL">
+     <dir name="Geography">
+      <dir name="SpatialData">
+       <file role="php" name="Campus.php"/>
+       <file role="php" name="DriverInterface.php"/>
+       <file role="php" name="PDOSQLiteDriver.php"/>
+       <file role="php" name="SQLiteDriver.php"/>
+      </dir>
+     </dir>
+    </dir>
+   </dir>
+  </dir>
  </contents>
  <dependencies>
   <required>
@@ -53,7 +70,7 @@ Add SDPG
    </package>
   </required>
  </dependencies>
- <phprelease />
+ <phprelease/>
  <changelog>
   <release>
    <version>
