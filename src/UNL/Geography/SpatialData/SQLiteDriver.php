@@ -117,9 +117,12 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     static public function getDataDir()
     {
-        if ('@@DATA_DIR@@' == '@@DATA'.'_DIR@@') {
-            return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/';
+        if (file_exists(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/UNL_Geography_SpatialData_Campus/pear.unl.edu')) {
+            return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/UNL_Geography_SpatialData_Campus/pear.unl.edu/';
         }
-        return '@@DATA_DIR@@/UNL_Geography_SpatialData_Campus/data/';
+        if (file_exists(dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/UNL_Geography_SpatialData_Campus')) {
+            return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/UNL_Geography_SpatialData_Campus/data/';
+        }
+        return dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/data/';
     }
 }
