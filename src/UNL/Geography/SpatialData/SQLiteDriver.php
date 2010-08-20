@@ -24,14 +24,11 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
      */
     function getGeoCoordinates($code)
     {
-        if ($this->buildingExists($code)) {
-            // Code is valid, find the geo coordinates.
-            $this->_checkDB();
-            if ($result = $this->getDB()->query('SELECT lat,lon FROM campus_spatialdata WHERE code = \''.$code.'\';')) {
-                while ($coords = $result->fetch()) {
-                    return array('lat'=>$coords['lat'],
-                                 'lon'=>$coords['lon']);
-                }
+        $this->_checkDB();
+        if ($result = $this->getDB()->query('SELECT lat,lon FROM campus_spatialdata WHERE code = \''.$code.'\';')) {
+            while ($coords = $result->fetch()) {
+                return array('lat'=>$coords['lat'],
+                             'lon'=>$coords['lon']);
             }
         }
         return false;
