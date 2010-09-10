@@ -64,7 +64,7 @@ class UNL_Geography_SpatialData_Campus
      */
     function getMapURL($code)
     {
-        $mapurl = 'http://www1.unl.edu/tour/';
+        $mapurl = 'http://maps.unl.edu/#';
         return $mapurl.$code;
     }
 }
