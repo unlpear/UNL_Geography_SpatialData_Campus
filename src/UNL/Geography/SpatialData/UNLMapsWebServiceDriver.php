@@ -33,7 +33,7 @@ class UNL_Geography_SpatialData_UNLMapsWebServiceDriver implements UNL_Geography
     {
         if (isset($this->geo_data[$code])) {
             return array('lat'=>$this->geo_data[$code]['position']['point']['latitude'],
-                         'lon'=>$this->geo_data[$code]['position']['point']['latitude']);
+                         'lon'=>$this->geo_data[$code]['position']['point']['longitude']);
         }
         return false;
     }
