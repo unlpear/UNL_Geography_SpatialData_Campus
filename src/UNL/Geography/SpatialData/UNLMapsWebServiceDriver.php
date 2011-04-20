@@ -11,7 +11,16 @@ class UNL_Geography_SpatialData_UNLMapsWebServiceDriver implements UNL_Geography
     {
         $this->bldgs = new UNL_Common_Building();
         $json = file_get_contents($this->maps_server.'?view=buildings&format=json');
+        if (false === $json) {
+            throw new Exception('Could not connect to the maps web service');
+        }
+
         $data = json_decode($json, true);
+
+        if (false === $data) {
+            throw new Exception('The data retrieved was invalid json');
+        }
+
         $this->geo_data = $data['buildings'];
     }
     /**
