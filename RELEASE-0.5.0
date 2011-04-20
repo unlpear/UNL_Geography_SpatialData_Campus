@@ -1,0 +1,4 @@
+Fixes and Additions:
+
+ - Add data for all Selleck buildings and 19PG
+ - Fix warning on row count for PDO data driver
