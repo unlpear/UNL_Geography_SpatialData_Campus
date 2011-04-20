@@ -29,8 +29,8 @@ class UNL_Geography_SpatialData_Campus
     {
         if (!isset(self::$driver)) {
             require_once 'UNL/Geography/SpatialData/DriverInterface.php';
-            require_once 'UNL/Geography/SpatialData/SQLiteDriver.php';
-            self::$driver = new UNL_Geography_SpatialData_SQLiteDriver();
+            require_once 'UNL/Geography/SpatialData/UNLMapsWebServiceDriver.php';
+            self::$driver = new UNL_Geography_SpatialData_UNLMapsWebServiceDriver();
         }
         return self::$driver;
     }
