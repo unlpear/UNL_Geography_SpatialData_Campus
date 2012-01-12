@@ -11,8 +11,8 @@ class UNL_Geography_SpatialData_PDOSQLiteDriver extends UNL_Geography_SpatialDat
 
     protected function __connect()
     {
-        self::$db = new PDO('sqlite:'.self::getDataDir().self::$db_file);
-        return self::$db;
+        $this->db = new PDO('sqlite:'.self::getDataDir().self::$db_file);
+        return $this->db;
     }
 
     protected function _getResultRowCount($result)

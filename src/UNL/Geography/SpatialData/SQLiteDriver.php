@@ -5,11 +5,11 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     static public $db_file = 'spatialdata.sqlite';
 
-    static protected $db;
+    protected $db;
     
     public $bldgs;
 
-    static protected $db_class = 'SQLiteDatabase';
+    protected $db_class = 'SQLiteDatabase';
 
     function __construct()
     {
@@ -70,10 +70,10 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     function getDB()
     {
-        if (!isset(self::$db)) {
+        if (!isset($this->db)) {
             return $this->__connect();
         }
-        return self::$db;
+        return $this->db;
     }
 
     function tableExists($table)
@@ -90,8 +90,8 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     protected function __connect()
     {
-        if (self::$db = new self::$db_class(self::getDataDir().self::$db_file)) {
-            return self::$db;
+        if ($this->db = new $this->db_class(self::getDataDir().self::$db_file)) {
+            return $this->db;
         }
         throw new Exception('Cannot connect to database!');
     }
