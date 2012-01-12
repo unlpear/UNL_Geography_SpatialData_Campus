@@ -1,0 +1,4 @@
+Fixes and Additions:
+
+ - Avoid static database reference in SQLite and PDOSQLite drivers
+ - Add geo coordinates for NRRA
