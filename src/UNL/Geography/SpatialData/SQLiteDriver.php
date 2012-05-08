@@ -50,10 +50,17 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     protected function _checkDB()
     {
-       if (!$this->tableExists('campus_spatialdata')) {
+        static $checked = false;
+        if ($checked) {
+            return true;
+        }
+
+        // Check if the data exists
+        if (!$this->tableExists('campus_spatialdata')) {
             $this->getDB()->query(self::getTableDefinition());
             $this->importCSV('campus_spatialdata', self::getDataDir().'campus_spatialdata.csv');
         }
+        $checked = true;
     }
 
     static public function getTableDefinition()
