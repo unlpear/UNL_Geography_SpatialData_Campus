@@ -17,7 +17,12 @@ class UNL_Geography_SpatialData_PDOSQLiteDriver extends UNL_Geography_SpatialDat
 
     protected function _getResultRowCount($result)
     {
-        return $result->rowCount();
+        $column = $result->fetchColumn();
+        if (!empty($column)) {
+            return true;
+        }
+
+        return false;
     }
 
 }
