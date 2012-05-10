@@ -11,6 +11,8 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     protected $db_class = 'SQLiteDatabase';
 
+    protected $db_checked = false;
+
     function __construct()
     {
         $this->bldgs = new UNL_Common_Building();
@@ -50,8 +52,8 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
 
     protected function _checkDB()
     {
-        static $checked = false;
-        if ($checked) {
+
+        if ($this->db_checked) {
             return true;
         }
 
@@ -60,7 +62,7 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
             $this->getDB()->query(self::getTableDefinition());
             $this->importCSV('campus_spatialdata', self::getDataDir().'campus_spatialdata.csv');
         }
-        $checked = true;
+        $this->db_checked = true;
     }
 
     static public function getTableDefinition()
