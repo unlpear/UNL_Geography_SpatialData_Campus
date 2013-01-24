@@ -12,10 +12,10 @@ This package contains spatial data, latitude and longitude for buildings on the 
   <email>saltybeagle@php.net</email>
   <active>yes</active>
  </lead>
- <date>2012-01-12</date>
- <time>10:48:22</time>
+ <date>2013-01-24</date>
+ <time>10:28:59</time>
  <version>
-  <release>0.6.0</release>
+  <release>0.7.0</release>
   <api>0.4.0</api>
  </version>
  <stability>
@@ -23,10 +23,8 @@ This package contains spatial data, latitude and longitude for buildings on the 
   <api>alpha</api>
  </stability>
  <license uri="http://www1.unl.edu/wdn/wiki/Software_License">BSD License</license>
- <notes>Fixes and Additions:
+ <notes>Add centroid for Voelte-Keegan Nanoscience Research Center, NANO
 
- - Avoid static database reference in SQLite and PDOSQLite drivers
- - Add geo coordinates for NRRA
 
 Add data driver interfaces</notes>
  <contents>
