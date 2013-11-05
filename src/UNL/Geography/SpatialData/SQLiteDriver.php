@@ -116,7 +116,10 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
                     $data[] = "'".sqlite_escape_string(stripslashes(trim($field, "\"\n")))."'";
                 }
                 $data = implode(',',$data);
-                $db->query("INSERT INTO ".$table." VALUES ($data);");
+                $sql = "INSERT INTO ".$table." VALUES ($data);";
+                if (false == $db->query($sql)) {
+                    throw new Exception('Error inserting '.$data);
+                }
             }
         }
     }
