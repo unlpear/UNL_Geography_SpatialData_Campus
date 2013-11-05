@@ -113,7 +113,7 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
                 $data = array();
                 $line = str_replace('NULL', '""', $line);
                 foreach (explode('","',$line) as $field) {
-                    $data[] = "'".sqlite_escape_string(stripslashes(trim($field, "\"\n")))."'";
+                    $data[] = $this->escape(stripslashes(trim($field, "'\"\n")));
                 }
                 $data = implode(',',$data);
                 $sql = "INSERT INTO ".$table." VALUES ($data);";
@@ -122,6 +122,11 @@ class UNL_Geography_SpatialData_SQLiteDriver implements UNL_Geography_SpatialDat
                 }
             }
         }
+    }
+
+    public function escape($string)
+    {
+        return sqlite_escape_string($string);
     }
 
     static public function getDataDir()

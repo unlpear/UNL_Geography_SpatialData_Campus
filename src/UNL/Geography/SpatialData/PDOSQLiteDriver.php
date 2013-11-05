@@ -46,6 +46,11 @@ class UNL_Geography_SpatialData_PDOSQLiteDriver extends UNL_Geography_SpatialDat
         return false;
     }
 
+    public function escape($string)
+    {
+        return $this->getDB()->quote($string);
+    }
+
     protected function _getResultRowCount($result)
     {
         $column = $result->fetchColumn();
